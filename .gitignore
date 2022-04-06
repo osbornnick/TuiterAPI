@@ -1,0 +1,14 @@
+.idea
+node_modules
+<<<<<<< HEAD
+build
+<<<<<<< HEAD
+=======
+build
+out
+>>>>>>> f657fce2d1173d7ca60b64b7d4b95cd950a97885
+=======
+data
+out
+coverage
+>>>>>>> a5e20dae8f4ea44b61ceb02e49caf5c2ee27a709
