@@ -5,8 +5,7 @@ export default interface Snippet {
     code: string,
     author: User,
     created: Date,
-    tuit?: Tuit,
-    postedOn?: Date
+    tuit?: Tuit
     //want parent information for forking?
     //parentSnippet?: Tuit,
     //parentAuthor?: User
