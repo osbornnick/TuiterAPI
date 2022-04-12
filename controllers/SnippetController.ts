@@ -5,8 +5,6 @@ import SnippetDao from "../daos/SnippetDao";
 import Snippet from "../models/snippets/snippet";
 import { Express, Request, Response } from "express";
 import SnippetControllerI from "../interfaces/SnippetControllerI";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 
 /**
  * @class SnippetController implements RESTful API for snippets with the following endpoints:
