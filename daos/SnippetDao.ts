@@ -4,7 +4,6 @@
 import SnippetModel from "../mongoose/snippets/SnippetModel";
 import Snippet from "../models/snippets/snippet";
 import SnippetDaoI from "../interfaces/SnippetDaoI";
-import Tuit from "../models/tuits/Tuit";
 
 /**
  * @class SnippetDao implements a DAO to manage the storage and access of Snippets
@@ -35,7 +34,7 @@ export default class SnippetDao implements SnippetDaoI {
      */
     findSnippetsByUser = async (uid: string): Promise<Snippet[]> =>
         SnippetModel.find({author: uid})
-            .populate("authot")
+            .populate("author")
             .exec();
     /**
      * creates a snippet object with a given user as author
