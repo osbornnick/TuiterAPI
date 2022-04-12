@@ -15,6 +15,7 @@ const TuitSchema = new mongoose.Schema<Tuit>(
             likes: { type: Number, default: 0 },
             dislikes: { type: Number, default: 0 },
         },
+        snippet: { type: Schema.Types.ObjectId, ref: "SnippetModel" },
     },
     { collection: "tuits" }
 );
