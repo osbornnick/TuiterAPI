@@ -7,5 +7,4 @@ export default interface SnippetDaoI {
     createSnippet (uid: string, code: Snippet): Promise<Snippet>;
     editSnippet (sid: string, code: Snippet): Promise<any>;
     deleteSnippet (sid: string): Promise<any>;
-    //shareSnippet (uid: string, sid: string): Promise<Tuit>;
 }
