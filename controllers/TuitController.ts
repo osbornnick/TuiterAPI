@@ -56,7 +56,6 @@ export default class TuitController implements TuitControllerI {
                 "/api/tuits/:uid",
                 TuitController.tuitController.deleteTuit
             );
-            app.post("/api/users/:uid/snippets/:sid/share", TuitController.tuitController.createSnippetTuit);
         }
         return TuitController.tuitController;
     };
@@ -159,9 +158,4 @@ export default class TuitController implements TuitControllerI {
         TuitController.tuitDao
             .deleteTuit(req.params.uid)
             .then((status) => res.send(status));
-    
-    createSnippetTuit = (req: Request, res: Response) =>
-        TuitController.tuitDao
-            .createSnippetTuitByUser(req.params.uid, req.params.sid, req.body)
-            .then((tuit: Tuit) => res.json(tuit));
 }
