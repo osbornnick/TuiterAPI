@@ -1,12 +1,8 @@
-import User from "../users/User"
-import Tuit from "../tuits/Tuit"
+import User from "../users/User";
 
 export default interface Snippet {
-    code: string,
-    author: User,
-    created: Date,
-    tuit?: Tuit
-    //want parent information for forking?
-    //parentSnippet?: Tuit,
-    //parentAuthor?: User
+    code: string;
+    author: User;
+    created: Date;
+    forkedFrom?: Snippet;
 }
