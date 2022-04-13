@@ -19,9 +19,11 @@ import LikeController from "./controllers/LikeController";
 import SessionController from "./controllers/SessionController";
 import AuthenticationController from "./controllers/AuthenticationController";
 import DislikeController from "./controllers/DislikeController";
+import SnippetController from "./controllers/SnippetController";
 import mongoose from "mongoose";
 import GroupController from "./controllers/GroupController";
 import "dotenv/config";
+
 const cors = require("cors");
 const session = require("express-session");
 
@@ -29,7 +31,7 @@ const session = require("express-session");
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
-const HOST = "cluster0.hejjh.mongodb.net";
+const HOST = "cluster0.8glrl.mongodb.net";
 const DB_NAME = "myFirstDatabase";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`; // connect to the database
@@ -38,7 +40,7 @@ mongoose.connect(connectionString);
 const app = express();
 
 let origin = "http://localhost:3000";
-if (process.env.ENVIRONMENT === "PRODUCTION" && process.env.CORS_ORIGIN)
+if (process.env.ENVIRONMENT === "production" && process.env.CORS_ORIGIN)
     origin = process.env.CORS_ORIGIN;
 
 app.use(
@@ -59,7 +61,7 @@ let sess = {
     },
 };
 
-if (process.env.ENVIRONMENT === "PRODUCTION") {
+if (process.env.ENVIRONMENT === "production") {
     app.set("trust proxy", 1); // trust first proxy
     sess.cookie.secure = true; // serve secure cookies
 }
@@ -76,6 +78,7 @@ DislikeController.getInstance(app);
 UserController.getInstance(app);
 TuitController.getInstance(app);
 LikeController.getInstance(app);
+SnippetController.getInstance(app);
 SessionController(app);
 AuthenticationController(app);
 GroupController(app);
