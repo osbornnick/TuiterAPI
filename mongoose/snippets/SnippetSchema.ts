@@ -4,6 +4,7 @@ import Snippet from "../../models/snippets/snippet";
 const SnippetSchema = new mongoose.Schema<Snippet>(
     {
         code: { type: String, required: true },
+        title: { type: String },
         author: { type: Schema.Types.ObjectId, ref: "UserModel" },
         created: { type: Date, default: Date.now },
         forkedFrom: { type: Schema.Types.ObjectId, ref: "SnippetModel" },
