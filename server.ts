@@ -12,7 +12,6 @@
  * service
  */
 import express, { Request, Response } from "express";
-import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
@@ -21,7 +20,6 @@ import AuthenticationController from "./controllers/AuthenticationController";
 import DislikeController from "./controllers/DislikeController";
 import SnippetController from "./controllers/SnippetController";
 import mongoose from "mongoose";
-import GroupController from "./controllers/GroupController";
 import "dotenv/config";
 
 const cors = require("cors");
@@ -81,7 +79,6 @@ LikeController.getInstance(app);
 SnippetController.getInstance(app);
 SessionController(app);
 AuthenticationController(app);
-GroupController(app);
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.
