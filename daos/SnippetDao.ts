@@ -13,29 +13,25 @@ import SnippetDaoI from "../interfaces/SnippetDaoI";
 export default class SnippetDao implements SnippetDaoI {
     private static snippetDao: SnippetDao | null = null;
     public static getInstance = (): SnippetDao => {
-        if(SnippetDao.snippetDao === null) {
+        if (SnippetDao.snippetDao === null) {
             SnippetDao.snippetDao = new SnippetDao();
         }
         return SnippetDao.snippetDao;
-    }
+    };
     private constructor() {}
     /**
      * retrieves a list of all snippet objects in the database
      * @returns an array of snippets
      */
     findAllSnippets = async (): Promise<Snippet[]> =>
-        SnippetModel.find()
-            .populate("author")
-            .exec();
+        SnippetModel.find().populate("author").exec();
     /**
      * retrieves a list of snippets created by a specific user
      * @param uid the object ID of the user
      * @returns an array of snippets
      */
     findSnippetsByUser = async (uid: string): Promise<Snippet[]> =>
-        SnippetModel.find({author: uid})
-            .populate("author")
-            .exec();
+        SnippetModel.find({ author: uid }).populate("author").exec();
     /**
      * creates a snippet object with a given user as author
      * @param uid the object id of the snippet author
@@ -43,7 +39,7 @@ export default class SnippetDao implements SnippetDaoI {
      * @returns a snippet object
      */
     createSnippet = async (uid: string, code: Snippet): Promise<Snippet> =>
-        SnippetModel.create({...code, author: uid});
+        SnippetModel.create({ ...code, author: uid });
     /**
      * updates the code of a snippet
      * @param sid the object ID of the snippet to be updated
@@ -51,14 +47,20 @@ export default class SnippetDao implements SnippetDaoI {
      * @returns the updated snippet
      */
     editSnippet = async (sid: string, code: Snippet): Promise<any> =>
-        SnippetModel.updateOne(
-            {_id: sid},
-            {$set: code});
+        SnippetModel.updateOne({ _id: sid }, { $set: code });
     /**
      * deletes a specific snippet from the database
      * @param sid the object ID of the snippet to be deleted
      * @returns a status on the success of the deletion operation
      */
     deleteSnippet = async (sid: string): Promise<any> =>
-        SnippetModel.deleteOne({_id: sid});
+        SnippetModel.deleteOne({ _id: sid });
+
+    /**
+     * find a specific snippet from the database by id
+     * @param sid  the object iD of the snippet to be found
+     * @returns either the snippet found, or none found
+     */
+    findSnippet = async (sid: string): Promise<any> =>
+        SnippetModel.findOne({ _id: sid });
 }
