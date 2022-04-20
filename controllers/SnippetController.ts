@@ -31,14 +31,35 @@ export default class SnippetController implements SnippetControllerI {
     public static getInstance = (app: Express): SnippetController => {
         if (SnippetController.snippetController === null) {
             SnippetController.snippetController = new SnippetController();
-            app.get("/api/snippets", SnippetController.snippetController.findAllSnippets);
-            app.get("/api/users/:uid/snippets", SnippetController.snippetController.findSnippetsByUser);
-            app.post("/api/users/:uid/snippets", SnippetController.snippetController.createSnippet);
-            app.put("/api/snippets/:sid", SnippetController.snippetController.editSnippet);
-            app.delete("/api/snippets/:sid", SnippetController.snippetController.deleteSnippet);
-
+            app.get(
+                "/api/snippets",
+                SnippetController.snippetController.findAllSnippets
+            );
+            app.get(
+                "/api/users/:uid/snippets",
+                SnippetController.snippetController.findSnippetsByUser
+            );
+            app.post(
+                "/api/users/:uid/snippets",
+                SnippetController.snippetController.createSnippet
+            );
+            app.put(
+                "/api/snippets/:sid",
+                SnippetController.snippetController.editSnippet
+            );
+            app.delete(
+                "/api/snippets/:sid",
+                SnippetController.snippetController.deleteSnippet
+            );
+            app.get(
+                "/api/snippets/:sid",
+                SnippetController.snippetController.findSnippet
+            );
             //test functions
-            app.post("/api/users/:uid/snippets/test", SnippetController.snippetController.createSnippetById);
+            app.post(
+                "/api/users/:uid/snippets/test",
+                SnippetController.snippetController.createSnippetById
+            );
         }
         return SnippetController.snippetController;
     };
@@ -54,7 +75,7 @@ export default class SnippetController implements SnippetControllerI {
         SnippetController.snippetDao
             .findAllSnippets()
             .then((snippets: Snippet[]) => res.json(snippets));
-    
+
     /**
      * Retrieves a list of all snippet objects for the active user profile
      * @param {Request} req Represents request from client
@@ -116,7 +137,7 @@ export default class SnippetController implements SnippetControllerI {
         SnippetController.snippetDao
             .editSnippet(req.params.sid, req.body)
             .then((status) => res.send(status));
-    
+
     /**
      * deletes a specified snippet
      * @param {Request} req Represents request from client, including the snippet ID
@@ -137,5 +158,16 @@ export default class SnippetController implements SnippetControllerI {
         SnippetController.snippetDao
             .createSnippet(req.params.uid, req.body)
             .then((snippet: Snippet) => res.json(snippet));
-    }
+    };
+
+    /**
+     * Find a snippet by ID
+     * @param {Request} req Represents request from client, including the snippet ID
+     * @param {Response} res Represents response to client that includes the found (or not) snippet
+     */
+    findSnippet = (req: Request, res: Response) => {
+        SnippetController.snippetDao
+            .findSnippet(req.params.sid)
+            .then((snippet: Snippet) => res.json(snippet));
+    };
 }
